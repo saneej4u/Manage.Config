@@ -16,7 +16,8 @@ https://github.com/saneej4u/Manage.Config/assets/22857988/23211522-07f9-446e-b71
 
 <br/>
 
-![image](https://github.com/saneej4u/Manage.Config/assets/22857988/09797baf-526d-48c9-baea-358bea906fb0)
+![image](https://github.com/saneej4u/Manage.Config/assets/22857988/ee994bf5-d5b1-4a1b-9ebd-ae5e0f68e129)
+
 
 
 <h2>Screenshot</h2>
