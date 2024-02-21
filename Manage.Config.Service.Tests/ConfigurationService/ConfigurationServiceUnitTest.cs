@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using FluentAssertions;
 using Manage.Config.Service.Models;
+using Manage.Config.Service.Services.FileManager;
 using Manage.Config.Service.Services.Mappers;
 using Manage.Config.Services.Configuration;
 using Manage.Configuration.Services.Configuration;
@@ -13,13 +14,15 @@ namespace Manage.Config.Service.Tests
         private Fixture _fixture;
         private IConfigurationService _sut;
         private IConfigurationMapper _configurationMapperStub;
+        private IFileManagerService _fileManagerServiceStub;
 
         [SetUp]
         public void SetUp()
         {
             _fixture = new Fixture();
             _configurationMapperStub = Substitute.For<IConfigurationMapper>();
-            _sut = new ConfigurationService(_configurationMapperStub);
+            _fileManagerServiceStub = Substitute.For<IFileManagerService>();
+            _sut = new ConfigurationService(_configurationMapperStub, _fileManagerServiceStub);
         }
 
         [Test]
@@ -47,6 +50,9 @@ namespace Manage.Config.Service.Tests
             // Arrange
             string filePath = Path.GetFullPath(@"TestFiles\nodataconfig.txt");
 
+            var lines = new List<List<string>> { };
+            _fileManagerServiceStub.ReadFileAndGroupByEmptyLineAsync(default).ReturnsForAnyArgs(lines);
+
             // Act
             var result = await _sut.GetAllServerConfigurationAsync(filePath);
 
@@ -66,6 +72,9 @@ namespace Manage.Config.Service.Tests
         {
             // Arrange
             string filePath = Path.GetFullPath(@"TestFiles\nodefaultserverconfig.txt");
+
+            var lines = _fixture.Create<List<List<string>>>();
+            _fileManagerServiceStub.ReadFileAndGroupByEmptyLineAsync(default).ReturnsForAnyArgs(lines);
 
             var defaultServer = _fixture.Create<ServerDetailsModel>();
             defaultServer.ServerType = Configuration.Service.Models.ServerTypes.SERVER_SPECIFIC;
@@ -99,6 +108,9 @@ namespace Manage.Config.Service.Tests
             specificServer.ServerType = Configuration.Service.Models.ServerTypes.DEFAULT;
             _configurationMapperStub.MapToSpecificServerDetailsModel(default, specificServer).ReturnsForAnyArgs(specificServer);
 
+            var lines = _fixture.Create<List<List<string>>>();
+            _fileManagerServiceStub.ReadFileAndGroupByEmptyLineAsync(default).ReturnsForAnyArgs(lines);
+
             // Act
             var result = await _sut.GetAllServerConfigurationAsync(filePath);
 
@@ -127,6 +139,8 @@ namespace Manage.Config.Service.Tests
             specificServer.ServerType = Configuration.Service.Models.ServerTypes.SERVER_SPECIFIC;
             _configurationMapperStub.MapToSpecificServerDetailsModel(default, specificServer).ReturnsForAnyArgs(specificServer);
 
+            var lines = _fixture.Create<List<List<string>>>();
+            _fileManagerServiceStub.ReadFileAndGroupByEmptyLineAsync(default).ReturnsForAnyArgs(lines);
             // Act
             var result = await _sut.GetAllServerConfigurationAsync(filePath);
 
