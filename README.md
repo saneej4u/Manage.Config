@@ -11,8 +11,6 @@ https://github.com/saneej4u/Manage.Config/assets/22857988/23211522-07f9-446e-b71
 
 <h2>Project Structure</h2>
 
-<b> Note: </b> I have just added the RestFul API project (Manage.Config.API) to the flow, even though it wasn't included in the test requirements.
-
 ![image](https://github.com/saneej4u/Manage.Config/assets/22857988/124bae21-bb3c-4ff2-8ad2-c632c889d912)
 
 <br/>
