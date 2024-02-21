@@ -11,11 +11,13 @@ https://github.com/saneej4u/Manage.Config/assets/22857988/23211522-07f9-446e-b71
 
 <h2>Project Structure</h2>
 
-![image](https://github.com/saneej4u/Manage.Config/assets/22857988/124bae21-bb3c-4ff2-8ad2-c632c889d912)
+![image](https://github.com/saneej4u/Manage.Config/assets/22857988/20ef8ff7-ffad-486e-bae4-5582da3d8d86)
+
 
 <br/>
 
-![image](https://github.com/saneej4u/Manage.Config/assets/22857988/76372b19-a41d-4451-aac7-2ecb25582cd8)
+![image](https://github.com/saneej4u/Manage.Config/assets/22857988/09797baf-526d-48c9-baea-358bea906fb0)
+
 
 <h2>Screenshot</h2>
 
