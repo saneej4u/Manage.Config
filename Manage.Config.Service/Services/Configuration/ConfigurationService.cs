@@ -2,15 +2,18 @@
 using Manage.Configuration.Service.Models;
 using Manage.Config.Service.Models;
 using Manage.Config.Service.Services.Mappers;
+using Manage.Config.Service.Services.FileManager;
 
 namespace Manage.Config.Services.Configuration
 {
     public class ConfigurationService : IConfigurationService
     {
         private readonly IConfigurationMapper _configurationMapper;
-        public ConfigurationService(IConfigurationMapper configurationMapper)
+        private readonly IFileManagerService _fileManagerService;
+        public ConfigurationService(IConfigurationMapper configurationMapper, IFileManagerService fileManagerService)
         {
             _configurationMapper = configurationMapper;
+            _fileManagerService = fileManagerService;
         }
         public async Task<ResponseWrapper<ServerModel>> GetAllServerConfigurationAsync(string filePath)
         {
@@ -20,7 +23,7 @@ namespace Manage.Config.Services.Configuration
             }
 
             // Read file and group by empty line
-            var configurations = await ReadFileAndGroupByEmptyLineAsync(filePath);
+            var configurations = await _fileManagerService.ReadFileAndGroupByEmptyLineAsync(filePath);
 
             if (configurations.Count == 0)
             {
@@ -53,40 +56,6 @@ namespace Manage.Config.Services.Configuration
             };
 
             return ResponseWrapper.CreateSuccess(serverDetailsModel);
-        }
-        private static async Task<List<List<string>>> ReadFileAndGroupByEmptyLineAsync(string filePath)
-        {
-            List<List<string>> groups = new List<List<string>>();
-            List<string> currentGroup = new List<string>();
-
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line;
-                while ((line = await reader.ReadLineAsync()) != null)
-                {
-                    line = line.Trim();
-                    if (string.IsNullOrWhiteSpace(line))
-                    {
-                        if (currentGroup.Count > 0)
-                        {
-                            groups.Add(currentGroup);
-                            currentGroup = new List<string>();
-                        }
-                    }
-                    else if (!line.StartsWith(";"))
-                    {
-                        currentGroup.Add(line);
-                    }
-                }
-
-                // Add the last group if it's not empty
-                if (currentGroup.Count > 0)
-                {
-                    groups.Add(currentGroup);
-                }
-            }
-
-            return groups;
         }
     }
 }

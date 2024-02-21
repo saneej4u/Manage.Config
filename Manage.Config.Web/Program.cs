@@ -1,3 +1,4 @@
+using Manage.Config.Service.Services.FileManager;
 using Manage.Config.Service.Services.Mappers;
 using Manage.Config.Services.Configuration;
 using Manage.Configuration.Services.Configuration;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 builder.Services.AddScoped<IConfigurationMapper, ConfigurationMapper>();
+builder.Services.AddScoped<IFileManagerService, FileManagerService>();
 
 
 var app = builder.Build();
