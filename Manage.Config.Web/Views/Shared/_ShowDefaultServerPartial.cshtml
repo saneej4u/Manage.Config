@@ -1,0 +1,31 @@
+﻿@model ServerDetailsModel;
+
+<table class="table table-dark table-striped">
+
+    <tbody>
+        <tr>
+            <th scope="row">@Model.ServerName.Key</th>
+            <td>@Model.ServerName.Value</td>
+        </tr>
+        <tr>
+            <th scope="row">@Model.URL.Key</th>
+            <td>@Model.URL.Value</td>
+        </tr>
+        <tr>
+            <th scope="row">@Model.Database.Key</th>
+            <td>@Model.Database.Value</td>
+        </tr>
+        <tr>
+            <th scope="row">@Model.IPAddress.Key</th>
+            <td>@Model.IPAddress.Value</td>
+        </tr>
+        <tr>
+            <th scope="row">@Model.Domain.Key</th>
+            <td>@Model.Domain.Value</td>
+        </tr>
+        <tr>
+            <th scope="row">@Model.CookieDomain.Key</th>
+            <td>@Model.CookieDomain.Value</td>
+        </tr>
+    </tbody>
+</table>

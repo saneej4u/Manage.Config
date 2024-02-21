@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ServerDetailsModel>;
+@{
+    Func<bool, string, string> IsDefault = (x, serverName) => x ? " (Default config) " : serverName;
+}
+
+@foreach (var specificServer in @Model)
+{
+    <div class="col">
+        <table class="table table-dark table-striped">
+
+            <tbody>
+                <tr>
+                    <th scope="row">@specificServer.ServerName.Key</th>
+                    <td>@specificServer.ServerName.Value</td>
+                    <td>@IsDefault(specificServer.ServerName.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@specificServer.URL.Key</th>
+                    <td>@specificServer.URL.Value</td>
+                    <td>@IsDefault(specificServer.URL.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@specificServer.Database.Key</th>
+                    <td>@specificServer.Database.Value</td>
+                    <td>@IsDefault(specificServer.Database.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@specificServer.IPAddress.Key</th>
+                    <td>@specificServer.IPAddress.Value</td>
+                    <td>@IsDefault(specificServer.IPAddress.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@specificServer.Domain.Key</th>
+                    <td>@specificServer.Domain.Value</td>
+                    <td>@IsDefault(specificServer.Domain.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+                <tr>
+                    <th scope="row">@specificServer.CookieDomain.Key</th>
+                    <td>@specificServer.CookieDomain.Value</td>
+                    <td>@IsDefault(specificServer.CookieDomain.IsDefaultUsed, specificServer.ServerName.ServerSuffixName)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
